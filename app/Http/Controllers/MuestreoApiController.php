@@ -4,8 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Muestreo;
+
 class muestreoApiController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +32,32 @@ class muestreoApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //Crea instancia del modelo
+        $nuevoMuestreo = new Muestreo();
+
+        //Llena el modelo con info de la solicitud
+        $nuevoMuestreo->usuario = $request->user()->id;
+        $nuevoMuestreo->tipo_trabajo = $request->input('tipo_trabajo');
+        $nuevoMuestreo->descripcion = $request->input('descripcion');
+        $nuevoMuestreo->nombre_cliente = $request->input('nombre_cliente');
+        $nuevoMuestreo->nombre_negocio = $request->input('nombre_negocio');
+        $nuevoMuestreo->rfc_negocio = $request->input('rfc_negocio');
+        $nuevoMuestreo->fecha = $request->input('fecha');
+        $nuevoMuestreo->ubicacion = $request->input('ubicacion');
+        $nuevoMuestreo->estado = $request->input('estado');
+        
+        //Arma una respuesta
+        $respuesta = array();
+        $respuesta['exito'] = false;
+
+        if ($nuevoMuestreo->save()) {
+            $respuesta['exito'] = true;
+        }
+
+        //Regresa la respuesta
+        return $respuesta;
+
     }
 
     /**

@@ -62,10 +62,12 @@
                 </div>
                 
                 <div class="card-body">
+                    <!--
                     <a href="{{route('muestreos.create')}}" class="btn btn-success">
                         <i class="fas fa-plus"></i>Agregar Trabajo Muestreo
                     </a>
                     <br><br>
+                    -->
 
                     <table class="table">
                         <thead>

@@ -42,7 +42,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h5><i class="icon fas fa-check"></i>¡Exito!</h5>
                 {{Session::get('exito')}}
-              </div>
+            </div>
             @endif
 
             @if(Session::has('error'))
@@ -50,8 +50,9 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h5><i class="icon fas fa-check"></i> ¡Error! </h5>
                 {{Session::get('error')}}
-              </div>
+            </div>
             @endif
+
             <!---->
             <div class="card">
 
@@ -135,7 +136,7 @@
     {
         $("#deleteForm").submit();
     }
- </script>
+</script>
 @endsection
 
 @section('estilos')
