@@ -8,8 +8,11 @@
     <title>@yield('titulo')</title>
 
     <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" >
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link href="{{ asset('assets/fonts/fontawesome-all.min.css') }}" rel="stylesheet" type="text/css" >
+
     
     @yield('estilos')
 </head>
@@ -288,6 +291,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     
     <script type="text/javascript" src="{{ asset('assets/js/theme.js') }}"></script>
+
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    
 
     <script>
 

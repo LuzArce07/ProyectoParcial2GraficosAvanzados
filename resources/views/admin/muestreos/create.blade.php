@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group">
 
-                            <label style="background-color: #f5ebff; color: #364a91;">Fecha:</label>
+                            <label style="background-color: #f5ebff; color: #364a91;">Fecha (Año, Mes, Dia):</label>
                             <input name= "txtFecha" type="text"  class="form-control" />
         
                         </div>
