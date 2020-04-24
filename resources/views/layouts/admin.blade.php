@@ -31,7 +31,10 @@
                     
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('muestreos.index')}}"><i class="fas fa-table"></i><span>Lista Muestreos</span></a></li>
                     
+                    @if(Auth::user()->id_tipo_usuario == 1)
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('usuarios.index')}}#"><i class="fas fa-user-circle"></i><span>Lista Usuarios</span></a></li>
+                    @endif
+                    
                 </ul>
                 
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>

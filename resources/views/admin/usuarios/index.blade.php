@@ -11,24 +11,29 @@
 <!-- Modal -->
 <div id="DeleteModal" class="modal fade text-danger" role="dialog">
     <div class="modal-dialog ">
-      <!-- Modal content-->
-      <form action="" id="deleteForm" method="post">
-          <div class="modal-content">
-              <div class="modal-header bg-danger">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title text-center">Borrar usuario</h4>
-              </div>
-              <div class="modal-body">
-                 @csrf
-                 @method('DELETE')
-                  <p class="text-center">¿Seguro que quieres borrar el usuario?</p>
-              </div>
-              <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-                      <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Si, borrar</button>
-              </div>
-          </div>
-      </form>
+        <div class="modal-content">
+            <!-- Modal content-->
+            <form action="" id="deleteForm" method="post">
+                
+                    <div class="modal-header ">
+                        <h4 class="modal-title">Borrar usuario</h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        @method('DELETE')
+                        <p class="text-center">¿Seguro que quieres borrar el usuario: <b> <span id="spn_usuarioID"></span> </b> ?</p>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Si, borrar</button>
+                    </div>
+                
+            </form>
+        </div>
     </div>
 </div>
 
@@ -88,7 +93,7 @@
                                     <td>{{$usuario->id}}</td>
                                     <td>{{$usuario->name}}</td>
                                     <td>{{$usuario->email}}</td>
-                                    <td>{{$usuario->id_tipo_usuario}}</td>
+                                    <td>{{$usuario->descripcion}}</td>
 
                                     <td>
                                         <form method="POST" action="{{route('usuarios.destroy', $usuario->id)}}">
@@ -105,7 +110,7 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$usuario->id}})" data-target="#DeleteModal" class="btn btn-danger">
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$usuario->id}},'{{$usuario->email}}')" data-target="#DeleteModal" class="btn btn-danger">
                                                     <i class="fas fa-times"></i>
                                                 </a>
                                         </form>
@@ -125,12 +130,15 @@
 
 @section('scripts')
 <script type="text/javascript">
-    function deleteData(id)
+    function deleteData(id, email)
     {
+        console.log(email);
         var id = id;
         var url = '{{ route("usuarios.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
+        $("#spn_usuarioID").text(email);
+
     }
     function formSubmit()
     {

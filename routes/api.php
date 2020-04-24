@@ -21,3 +21,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::apiResource('muestra', 'MuestreoApiController');
+
+Route::get('/muestrasFiltradasNuevas', 'MuestreoApiController@filtrarNuevas');
+Route::get('/muestrasFiltradasFinalizado', 'MuestreoApiController@filtrarFinalizado');
+
+
+Route::get('/capturista',
+function(){
+    return["mensaje" => "Este servicio es solo para capturistas Api"];
+
+})->name('api.capturista');
+
+

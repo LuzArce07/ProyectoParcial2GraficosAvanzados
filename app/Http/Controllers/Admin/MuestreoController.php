@@ -25,7 +25,37 @@ class MuestreoController extends Controller
      */
     public function index()
     {
-        $muestreos = Muestreo::all();
+        /*
+        //Verificar si en la solicitud viene un parametro llamado 'criterio' (para filtar)
+        $criterio = $request->input('criterio');
+        $muestreos = array();
+        if($criterio) {
+            
+            //Busca el resultado por el criterio
+            //Esto seria igual a que pusiera:
+            //SELECT * FROM muestreo WHERE tipo_trabajo LIKE '%criterio%'
+            $muestreos = Muestreo::where('tipo_trabajo', 'LIKE', '%'.$criterio.'%')->get();
+
+
+        } else {
+
+            //Me trae todo
+            $muestreos = Muestreo::all();
+
+        }
+        */
+
+        $muestreos = Muestreo::leftJoin(
+            'estado', //La tabla a unir
+            'estado.id_estado', //primer columna a evaluar
+            '=', //Como lo va a evaluar
+            'muestra.id_estado' //segunda columna a evaluar
+        )->get();
+
+        
+
+        //DESCOMENTARIAR ESTO DESPUES---------------
+        //$muestreos = Muestreo::all();
 
         $argumentos = array();
         $argumentos['muestreos'] = $muestreos;
@@ -164,6 +194,7 @@ class MuestreoController extends Controller
     public function destroy($id)
     {
         $muestreo = Muestreo::find($id);
+
         if($muestreo){
 
             if($muestreo->delete()){

@@ -4,35 +4,36 @@
 @section('titulo2', 'Lista de Muestreos')
 
 
-
-
-
 @section('contenido')
-<!-- Modal -->
+
+<!-- Modal delete-->
 <div id="DeleteModal" class="modal fade text-danger" role="dialog">
     <div class="modal-dialog ">
-      <!-- Modal content-->
-      <form action="" id="deleteForm" method="post">
-          <div class="modal-content">
-              <div class="modal-header bg-danger">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title text-center">Borrar muestreo</h4>
-              </div>
-              <div class="modal-body">
-                 @csrf
-                 @method('DELETE')
-                  <p class="text-center">¿Seguro que quieres borrar el muestreo?</p>
-              </div>
-              <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-                      <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Si, borrar</button>
-              </div>
-          </div>
-      </form>
+        <div class="modal-content">
+            <!-- Modal content-->
+            <form action="" id="deleteForm" method="post">
+                
+                    <div class="modal-header ">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-center">Borrar muestreo</h4>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        @method('DELETE')
+                        <p class="text-center">¿Seguro que quieres borrar el muestreo?</p>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Si, borrar</button>
+                    </div>
+                
+            </form>
+        </div>
     </div>
 </div>
 
 <div class="container-fluid">
+
     <div class="row">
 
         <div class="col-md-12">
@@ -52,7 +53,9 @@
                 {{Session::get('error')}}
               </div>
             @endif
+
             <!---->
+
             <div class="card">
 
                 <div class="card-header">
@@ -69,8 +72,26 @@
                     <br><br>
                     -->
 
+                    <!-- OTRA MANERA DE FILTRAR (INCLUYE COSAS EN EL CONTROLLER DE MUESTREO
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form >
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="criterio" id="txtCriterio"/>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Buscar</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    
+
+                    <br><br>-->
+
                     <div class="pull-right">
-                        <button class="btn btn-warning btn-filter "><span class="glyphicon glyphicon-filter"></span> Filtrar</button>
+                        <button class="btn btn-warning btn-filter">Filtrar</button>
                     </div>
 
                     <br/>
@@ -83,9 +104,11 @@
                                 <th>Tipo de trabajo</th>
                                 <th>Estado</th>
                                 <th>Fecha</th>
-                                <th>Usuario</th>-->
+                                <th>Usuario</th>
+                                -->
                                 
                                 <!-- -->
+                                <th>#</th>
                                 <th><input type="text" class="form-control" placeholder="Tipo de trabajo" disabled></th>
                                 <th><input type="text" class="form-control" placeholder="Estado" disabled></th>
                                 <th><input type="text" class="form-control" placeholder="Fecha" disabled></th>
@@ -97,10 +120,9 @@
 
                         <tbody>
 
-                           
-
                             @foreach($muestreos as $muestreo)
                                 <tr>
+                                    <td>{{$muestreo->id}}</td>
                                     <td>{{$muestreo->tipo_trabajo}}</td>
                                     <td>{{$muestreo->estado}}</td>
                                     <td>{{$muestreo->fecha}}</td>
@@ -136,16 +158,21 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('scripts')
+
+<!-- Delete js -->
 <script type="text/javascript">
-    function deleteData(id, email)
+    function deleteData(id)
     {
+        
         var id = id;
         var url = '{{ route("muestreos.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
+
     }
     function formSubmit()
     {
@@ -153,8 +180,8 @@
     }
 </script>
 
+<!-- Filtro js -->
 <script type="text/javascript">
-
     
     $(document).ready(function(){
         $('.filterable .btn-filter').click(function(){
@@ -200,6 +227,7 @@
     });
 
 </script>
+
 @endsection
 
 @section('estilos')

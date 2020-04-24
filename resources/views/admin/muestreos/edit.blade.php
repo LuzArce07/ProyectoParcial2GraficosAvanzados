@@ -95,7 +95,7 @@
                         <div class="form-group">
 
                             <label style="background-color: #f5ebff; color: #364a91;">Estado actual:</label>
-                            <input name= "txtEstado" type="text" value="{{$muestreo->estado}}" class="form-control" />
+                            <input name= "txtEstado" type="text" value="{{$muestreo->id_estado}}" class="form-control" />
         
                         </div>
                         <div class="form-group">

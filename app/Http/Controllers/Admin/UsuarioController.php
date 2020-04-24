@@ -14,6 +14,7 @@ class UsuarioController extends Controller
     public function __construct() {
 
         $this->middleware('auth');
+        $this->middleware('admin');
 
     }
 
@@ -24,8 +25,15 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all();
+        
+        $usuarios = Usuario::leftJoin(
+            'tipos_usuario', //La tabla a unir
+            'tipos_usuario.id_usuario', //primer columna a evaluar
+            '=', //Como lo va a evaluar
+            'users.id_tipo_usuario' //segunda columna a evaluar
+        )->get();
 
+        
         $argumentos = array();
         $argumentos['usuarios'] = $usuarios;
 
@@ -158,6 +166,7 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         $usuario = Usuario::find($id);
+        
         if($usuario){
 
             if($usuario->delete()){
